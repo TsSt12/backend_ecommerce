@@ -1,0 +1,11 @@
+# Entorno virtual
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Secretos: NUNCA al repositorio
+.env
+
+# Imágenes que suben los usuarios
+uploads/

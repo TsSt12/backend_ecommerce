@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends
 from fastapi.responses import Response
@@ -83,7 +83,7 @@ def dar_de_baja(
     uid = current_user.id
     current_user.nombre = f"Usuario eliminado #{uid}"
     current_user.email = f"eliminado_{uid}@anonimizado.invalid"
-    current_user.hashed_password = hash_password(f"BAJA-{uid}-{datetime.utcnow().isoformat()}")
+    current_user.hashed_password = hash_password(f"BAJA-{uid}-{datetime.now(timezone.utc).isoformat()}")
     current_user.activo = False
-    current_user.fecha_baja = datetime.utcnow()
+    current_user.fecha_baja = datetime.now(timezone.utc)
     db.commit()
